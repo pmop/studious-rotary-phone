@@ -30,12 +30,12 @@ class Api::V1::ReportsController < ApplicationController
       @reports = Report.all
     end
 
-    render json: @reports, status: :ok
+    render json: @reports.map { |report| default_report_hash report }, status: :ok
   end
 
   # GET /reports/1
   def show
-    render json: @report, status: :ok
+    render json: (default_report_hash @report), status: :ok
   end
 
   # POST /reports
@@ -50,7 +50,7 @@ class Api::V1::ReportsController < ApplicationController
                            status: 'new')
       @report.user = @user
       if @report.save
-        render json: @report, status: :created
+        render json: (default_report_hash @report), status: :created
       else
         render json: { error: @report.errors }, status: :unprocessable_entity
       end
@@ -63,16 +63,28 @@ class Api::V1::ReportsController < ApplicationController
 
   # PATCH/PUT /reports/1
   def update
-    if @report.update(report_params)
-      render json: @report
+    report_params = reports_optional_params 
+
+    unless report_params.empty?
+      report_params[:status] = 'edited' if report_params[:response].nil?
+
+      user = User.find_by_id params[:user_id]
+      @report.user ||= user
+
+      if @report.update(report_params)
+        render json: (default_report_hash @report), status: :ok
+      else
+        render json: { error: @report.errors }, status: :unprocessable_entity
+      end
     else
-      render json: @report.errors, status: :unprocessable_entity
+      render json: { error: 'Bad request' }, status: :bad_request
     end
   end
 
   # DELETE /reports/1
   def destroy
     @report.destroy
+    render json: { status: 'Report destroyed.' }, status: :ok
   end
 
   private
@@ -85,9 +97,34 @@ class Api::V1::ReportsController < ApplicationController
       @user = User.find_by_id payload['user_id']
     end
 
-
-    # Only allow a trusted parameter "white list" through.
     def mandatory_create_params
       %i[description lat lng]
+    end
+
+    # Optional parameters user can enter to update
+    def reports_optional_params
+      new_vals = {
+        description: params.fetch(:description, nil),
+        lat: params.fetch(:lat, nil),
+        lng: params.fetch(:lng, nil),
+        response: params.fetch(:response, nil)
+      }
+      new_vals[:status] = 'replied' if !new_vals[:response].nil?
+
+      new_vals.compact
+    end
+
+    def default_report_hash(report)
+      {
+        status: report.status,
+        description: report.description,
+        user_name: report.user.name ,
+        user_email: report.user.email,
+        lat: report.lat,
+        lng: report.lng,
+        response: report.response,
+        created_at: report.created_at,
+        updated_at: report.updated_at
+      }
     end
 end
