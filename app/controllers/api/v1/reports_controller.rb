@@ -43,17 +43,17 @@ class Api::V1::ReportsController < ApplicationController
       @report = Report.new(description: params[:description],
                            lat: params[:lat],
                            lng: params[:lng],
-                           response: 'waiting',
-                           status: 'waiting response')
+                           response: '',
+                           status: 'new')
       @report.user = @user
       if @report.save
         render json: @report, status: :created
       else
-        render json: @report.errors, status: :unprocessable_entity
+        render json: { error: @report.errors }, status: :unprocessable_entity
       end
     else
-        render json: "Missing mandatory parameters (description, lat, lng)",
-          status: :bad_request
+        render json: { error: "Missing mandatory parameters 
+                       (description, lat, lng)" }, status: :bad_request
     end
 
   end
@@ -77,6 +77,7 @@ class Api::V1::ReportsController < ApplicationController
     def set_report
       @report = Report.find(params[:id])
     end
+
     def set_user
       @user = User.find_by_id payload['user_id']
     end
