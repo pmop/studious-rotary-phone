@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ReportsControllerTest < ActionDispatch::IntegrationTest
+class Api::V1::ReportsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @report = reports(:one)
   end
