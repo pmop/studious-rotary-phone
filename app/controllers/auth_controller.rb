@@ -33,24 +33,6 @@ class AuthController < ApplicationController
       render json: { status: 'Logged out' }, status: :ok
   end
 
-  def recover
-    if params[:email].present?
-      email = params[:email].strip if params[:email].kind_of? String
-      if User.find_by_email email
-        # RecoveryMailer.with(email: params[:email],
-        #                  token: 'placeholder', csrf: 'placeholder')
-        render json: { status: "Recovery email sent to #{params[:email]}" }, status: :accepted
-      else
-        logger.warn "#{email} not found in the database."
-        # We should never give out if the email exists in the database
-        # So we send the same response as successful
-        render json: { status: "Recovery email sent to #{params[:email]}" }, status: :accepted
-      end
-    else
-      render json: { error: 'Bad request' }, status: :bad_request
-    end
-  end
-
   private
 
   def not_found
