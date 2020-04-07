@@ -13,16 +13,19 @@ class Api::V1::ReportsController < ApplicationController
   def index
     if params[:description].present?
       @reports = Report.search params[:description] 
-    elsif params[:newest_first].present? && params[:newest_first] == 'true'
+
+    elsif params[:newest_first].eql? 'true'
       @reports = Report.newest_first
-    elsif params[:oldest_first].present? && params[:oldest_first] == 'true'
+
+    elsif params[:oldest_first].eql? 'true'
       @reports = Report.oldest_first
-    elsif params[:updated_recently].present? && 
-      params[:updated_recently] == 'true'
+
+    elsif params[:updated_recently].eql? 'true'
       @reports = Report.updated_recently
-    elsif params[:updated_oldest].present? && 
-      params[:updated_oldest] == 'true'
+
+    elsif params[:updated_oldest].eql? 'true'
       @reports = Report.updated_oldest
+
     else
       @reports = Report.all
     end
