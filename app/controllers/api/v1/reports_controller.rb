@@ -84,7 +84,7 @@ class Api::V1::ReportsController < ApplicationController
   # DELETE /reports/1
   def destroy
     @report.destroy
-    render json: { status: 'Report destroyed.' }, status: :ok
+    render json: { status: 'Report destroyed' }, status: :ok
   end
 
   private
