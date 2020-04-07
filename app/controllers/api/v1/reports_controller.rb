@@ -3,22 +3,25 @@ module Api
   end
 end
 class Api::V1::ReportsController < ApplicationController
+  # Takes care of authentication.
   before_action :authorize_access_request!
   before_action :set_report, only: %i[show update destroy]
+  # Gets the current user for us. Just for convenience.
   before_action :set_user, only: %i[create update]
 
   # GET /reports
   def index
-    @reports = Report.all
+    if params[:description].present?
+      @reports = Report.search params[:description] 
+    else
+      @reports = Report.all
+    end
 
     render json: @reports, status: :ok
   end
 
   # GET /reports/1
   def show
-    if params[:description].present?
-      @reports = Report.search params[:description] 
-    end
     render json: @report, status: :ok
   end
 
@@ -65,10 +68,7 @@ class Api::V1::ReportsController < ApplicationController
       @report = Report.find(params[:id])
     end
     def set_user
-      user_id = payload['user_id']
-      unless user_id
-        @user = User.find(user_id).first
-      end
+      @user = User.find_by_id payload['user_id']
     end
 
 
