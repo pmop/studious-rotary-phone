@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 2.6.0'
+ruby '~> 2.6.6'
 
 # https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#config Timeout
 gem 'rack-timeout', '~> 0.6.0'
