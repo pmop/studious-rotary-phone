@@ -3,7 +3,8 @@ class User < ApplicationRecord
 
   NAME_REGEX = %r{[A-z]{3,12}+( ?[A-z]+)*}.freeze
 
-  validates :password_digest, presence: true
+  #validates :password, presence: true,
+  #                     confirmation: true
 
   validates :name, presence: true,
                    format: { with: NAME_REGEX },

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :recovery, only: %i[create index]
+  resources :recovery, only: %i[create]
+  patch 'recovery', controller: :recovery, action: :update
   post 'reset_password', controller: :recovery, action: :reset_password
 
   post 'refresh', controller: :refresh, action: :create
