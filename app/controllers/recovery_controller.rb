@@ -1,20 +1,21 @@
 class RecoveryController < ApplicationController
   before_action :authorize_access_request!, only: [:index]
-  before_action :set_user, only: [:create]
+  before_action :set_user, only: %i[create update]
 
-  #/recovery/csrf=''&access=''
-  # Set response cookies for csrf and token sent to user's email
   def create
-    payload = { user_id: @user.id }
-    session = JWTSessions::Session.new(payload: payload,
-                                       refresh_by_access_allowed: true)
-    tokens = session.login
-    response.set_cookie(JWTSessions.access_cookie,
-                          value: tokens[:access],
-                          httponly: true,
-                          secure: Rails.env.production?)
-    render json: { status: 'Use this session to reset your password',
-                   csrf: tokens[:csrf] }, status: :accepted   
+    render json: :ok
+  end
+
+  def update
+    password, password_confirmation = password_params
+    if @user.update({ password: password,
+                    password_confirmation: password_confirmation })
+    @user.clear_password_token!
+    render json: { status: 'Password updated' }, status: :accepted
+    else
+      render json: { error: @user.errors }, status: :unprocessable_entity,
+      location: user_path(@user)
+    end
   end
 
   # POST /reset_password/:email
@@ -40,6 +41,12 @@ class RecoveryController < ApplicationController
   end
 
   private
+
+  KEYS = [:password, :password_confirmation].freeze
+
+  def password_params
+    params.require(KEYS)
+  end
 
   def set_user
     @user = User.find_by reset_password_token: params.require(:token)
