@@ -17,11 +17,9 @@ if your rails is configured to run in another port, change accordingly.
 - `MAIL_SMTP_PASS` Your SMTP Password credential.
 - `MAIL_SMTP_AUTH_TYPE` Auth type. Default is `plain`.
 ### Database (Postgresql)
-- `DB_URL` Full connection url with credentials.
+- `DATABASE_URL` Full connection url with credentials.
 ### Rails
 - `RAILS_MASTER_KEY` Master key used by Rails.
-
-Bear in mind that the Dockerfile is configured to run rails *in production mode*.
 
 ## Endpoints
 
@@ -64,3 +62,5 @@ Latitude        -                     lat (decimal (10,6))
 Longitude       -                     lng (decimal (10,6))
 Response        Medida adotada        response (text)
 ```
+## Docker
+https://github.com/pmop/studious-rotary-phone-docker
