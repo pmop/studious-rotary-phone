@@ -6,9 +6,15 @@
     <h1>Hello, <%= @user_name %></h1>
 
     <p>To recover your password, click on the link bellow.</p>
-    <p>If clicking doesn't work, try copying and pasting into
+    <p>If clicking doesn't work, try copying the link and then paste it into
     your browser url field.</p> <br/>
-    <a target='_blank' href="<%= @recovery_link %>"><%= @recovery_link %></a>
+    <%= link_to 'Recover',
+      host: 'http://localhost:3000',
+      controller: 'recovery',
+      action: 'create',
+      csrf: @csrf,
+      access: @access,
+      method: :post %>
     
   </body>
 </html>

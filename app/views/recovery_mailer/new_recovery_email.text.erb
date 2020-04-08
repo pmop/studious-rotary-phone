@@ -4,5 +4,11 @@
     To recover your password, click on the link bellow.
     If clicking doesn't work, try copying and pasting into
     your browser url field.
-    <%= @recovery_link %>
+    <%= link_to 'Recover',
+      host: 'http://localhost:3000',
+      controller: 'recovery',
+      action: 'create',
+      csrf: @csrf,
+      access: @access,
+      method: :post %>
 

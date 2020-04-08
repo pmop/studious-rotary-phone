@@ -2,8 +2,8 @@
 class RecoveryMailerPreview < ActionMailer::Preview
   def new_recovery_email
     RecoveryMailer.with(email: 'teste@test.com',
-                        token: 'placeholder',
-                        csrf: 'placeholder')
+                        tokens: { csrf: 'placeholder',
+                                 access: 'placeholder' } )
       .new_recovery_email
   end
 end
