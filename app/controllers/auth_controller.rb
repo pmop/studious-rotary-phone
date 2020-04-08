@@ -33,14 +33,6 @@ class AuthController < ApplicationController
       render json: { status: 'Logged out' }, status: :ok
   end
 
-  def recover
-    if params[:email].present?
-      render json: { status: params[:email] }, status: :accepted
-    else
-      render json: { error: 'Bad request' }, status: :bad_request
-    end
-  end
-
   private
 
   def not_found
