@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello, <%= @user_name %></h1>
+
+    <p>To recover your password, click on the link bellow.</p>
+    <p>If clicking doesn't work, try copying the link and then paste it into
+    your browser url field.</p> <br/>
+    <%= link_to 'Recover',
+      host: 'http://localhost:3000',
+      controller: 'recovery',
+      action: 'create',
+      token: @token,
+      method: :post %>
+    
+  </body>
+</html>
