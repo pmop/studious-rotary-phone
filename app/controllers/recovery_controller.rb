@@ -27,7 +27,8 @@ class RecoveryController < ApplicationController
     session = JWTSessions::Session.new(payload: payload)
     user = User.find_by_id payload['user_id']
     session.flush_by_access_payload
-    # And create a session so user can reset his password
+    # And create a new working session so user can reset
+    # his password if he wishes
     payload = { user_id: user.id }
     session = JWTSessions::Session.new(payload: payload,
                                        refresh_by_access_allowed: true)
