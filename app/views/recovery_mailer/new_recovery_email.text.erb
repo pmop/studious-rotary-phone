@@ -1,0 +1,13 @@
+
+    Hello, <%= @user_name %>
+
+    To recover your password, click on the link bellow.
+    If clicking doesn't work, try copying and pasting into
+    your browser url field.
+    <%= link_to 'Recover',
+      host: 'http://localhost:3000',
+      controller: 'recovery',
+      action: 'create',
+      token: @token,
+      method: :post %>
+
