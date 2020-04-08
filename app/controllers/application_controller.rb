@@ -1,6 +1,12 @@
+module Pmop
+  class ResetPasswordError < StandardError
+  end
+end
 class ApplicationController < ActionController::API
   include JWTSessions::RailsAuthorization
   rescue_from JWTSessions::Errors::Unauthorized, with: :not_authorized
+  rescue_from Pmop::ResetPasswordError, with: :not_authorized
+  rescue_from ActionController::ParameterMissing, with: :bad_request
 
   def strip_whitespace
     params[:partner].each do |key, value|
