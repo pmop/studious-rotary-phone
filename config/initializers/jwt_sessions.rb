@@ -1,1 +1,2 @@
-JWTSessions.encryption_key = ENV['JWT_KEY']
+JWTSessions.encryption_key = Rails.application.credentials.secret_key_base
+JWTSessions.token_store = :memory
