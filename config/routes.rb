@@ -10,9 +10,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :recovery, only: %i[create index]
+  post 'reset_password', controller: :recovery, action: :reset_password
+
   post 'refresh', controller: :refresh, action: :create
   post 'auth', controller: :auth, action: :create
-  post 'auth/recover', controller: :auth, action: :recover
   delete 'auth', controller: :auth, action: :destroy
   post 'signup', controller: :signup, action: :create
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
