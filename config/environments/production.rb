@@ -102,4 +102,17 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  config.action_mailer.delivery_method = :smtp
+  host = ENV['MAIL_HOST']
+  config.action_mailer.default_url_options = { host: host }
+
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => ENV['MAIL_SMTP_ADDR'],
+    :port                 => ENV['MAIL_SMTP_PORT'],
+    :user_name            => ENV['MAIL_SMTP_USER'],
+    :password             => ENV['MAIL_SMTP_PASS'],
+    :authentication       => ENV['MAIL_SMTP_AUTH_TYPE'],
+    :enable_starttls_auto => true
+  }
 end
