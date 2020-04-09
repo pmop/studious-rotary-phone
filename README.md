@@ -4,7 +4,7 @@ Needed for Production, Test and Development modes
 
 ### JWT
 
-- `JWT_KEY` Secret that JWT uses to encrypt tokens.
+Defaults to memory store. If Redis store is preferred, [configure according](https://github.com/tuwukee/jwt_sessions#configuration).
 ### Hosts
 - `CORS_HOST` Host where responses originates. In development or test modes, set it to http://localhost:3000;
 if your rails is configured to run in another port, change accordingly.
