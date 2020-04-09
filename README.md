@@ -17,10 +17,11 @@ if your rails is configured to run in another port, change accordingly.
 - `MAIL_SMTP_PASS` Your SMTP Password credential.
 - `MAIL_SMTP_AUTH_TYPE` Auth type. Default is `plain`.
 ### Database (Postgresql)
-- `DATABASE_URL` Full connection url with credentials.
+- `DATABASE_URL` Full connection url with credentials (production).
+- `DATABASE_DEVELOPMENT_URL` Full connection url with credentials (development).
+- `DATABASE_TEST_URL` Full connection url with credentials (test).
 ### Rails
 - `RAILS_MASTER_KEY` Master key used by Rails.
-
 ## Endpoints
 
 ## Public
