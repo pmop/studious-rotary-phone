@@ -28,4 +28,17 @@ class User < ApplicationRecord
     self.reset_password_token_expires_at = nil
     save!
   end
+
+  def as_json
+    JSON.generate({
+      name:       self.name,
+      email:      self.email,
+      created_at: self.created_at,
+      updated_at: self.updated_at
+    })
+  end
+
+  def to_json
+    as_json
+  end
 end

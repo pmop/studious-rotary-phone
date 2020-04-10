@@ -103,16 +103,16 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   config.action_mailer.delivery_method = :smtp
-  host = ENV['MAIL_HOST']
+  host = ENV['MAIL_HOST'] || 'http://localhost:3000'
   config.action_mailer.default_url_options = { host: host }
 
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
     :address              => ENV['MAIL_SMTP_ADDR'],
-    :port                 => ENV['MAIL_SMTP_PORT'],
+    :port                 => ENV['MAIL_SMTP_PORT'] || 587,
     :user_name            => ENV['MAIL_SMTP_USER'],
     :password             => ENV['MAIL_SMTP_PASS'],
-    :authentication       => ENV['MAIL_SMTP_AUTH_TYPE'],
+    :authentication       => ENV['MAIL_SMTP_AUTH_TYPE'] || 'plain',
     :enable_starttls_auto => true
   }
 end
