@@ -117,6 +117,39 @@ describe Api::V1::UsersController do
         end
       end
      end
+
+     context 'failure' do
+       let!(:user_params) { {name: 'Placeholder'} }
+       context 'no access token' do
+         before { patch :update, params: user_params }
+
+         it { expect(response.code).to eq '401' }
+       end
+
+       context 'no csrf token' do
+         let(:access_token) { "Bearer #{@tokens[:access]}" }
+         let(:access_cookie) { @tokens[:access] }
+         let(:csrf_token) { @tokens[:csrf] }
+
+         before do
+           payload = { user_id: user.id }
+           session = JWTSessions::Session.new(payload: payload)
+           @tokens = session.login
+         end
+
+         it 'CSRF is not required for cookie-less based auth' do
+           request.headers[JWTSessions.access_header] = access_token
+           patch :update, params: user_params
+           expect(response.code).to eq '200'
+         end
+
+         it do
+           request.cookies[JWTSessions.access_cookie] = access_cookie
+           patch :update, params: user_params
+           expect(response.code).to eq '401'
+         end
+       end
+     end
    end
  
 #   describe 'DELETE #destroy' do
