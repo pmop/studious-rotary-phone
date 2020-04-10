@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     if @user
-      safe_json_response
+      render json: @user.as_json, status: :ok
     else
       not_found_or_unauthorized
     end
@@ -22,7 +22,7 @@ class Api::V1::UsersController < ApplicationController
       logger.info "#{new_vals}"
       unless new_vals.empty?
         if @user.update(new_vals)
-          safe_json_response(:accepted)
+          render json: @user.as_json, status: :ok
         else
           render json: { error: @user.errors }, status: :unprocessable_entity
         end
@@ -39,7 +39,7 @@ class Api::V1::UsersController < ApplicationController
     @user.destroy
     session = JWTSessions::Session.new(payload: payload)
     session.flush_by_access_payload
-    render json: { status: 'User deleted' }, status: :ok
+    render json: { status: 'Deleted' }, status: :ok
   end
 
   private
@@ -61,13 +61,6 @@ class Api::V1::UsersController < ApplicationController
       new_vals[:name] = name if !name.nil?
 
       new_vals
-    end
-
-    # Don't give information such as id and password
-    def safe_json_response(status = :ok)
-      render json: { name: @user.name, email: @user.email,
-                     created_at: @user.created_at,
-                     updated_at: @user.updated_at }, status: status 
     end
 
     def not_found_or_unauthorized
