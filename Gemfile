@@ -32,6 +32,9 @@ gem 'rack-cors'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'faker', '~> 2.11'
+  gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1', require: false
+  gem 'rspec-rails', '~> 4.0'
+  gem 'database_cleaner', '~> 1.8', '>= 1.8.4'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
