@@ -148,3 +148,5 @@ tags
 
 # End of https://www.gitignore.io/api/vim,ruby,railsconfig/master.key
 .env
+# Export env variables helper
+env.sh
