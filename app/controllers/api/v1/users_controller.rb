@@ -50,17 +50,7 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def user_params
-      email = params.fetch(:email, nil)
-      name = params.fetch(:name, nil)
-      password = params.fetch(:password, nil)
-
-      new_vals = {}
-
-      new_vals[:password] = password if !password.nil?
-      new_vals[:email] = email if !email.nil?
-      new_vals[:name] = name if !name.nil?
-
-      new_vals
+      require_optional :email, :name, :password
     end
 
     def not_found_or_unauthorized

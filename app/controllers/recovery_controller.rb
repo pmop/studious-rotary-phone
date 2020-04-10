@@ -1,11 +1,5 @@
 class RecoveryController < ApplicationController
-  before_action :authorize_access_request!, only: [:index]
-  before_action :set_user, only: %i[create update]
-
-  def create
-    render json: :ok
-  end
-
+  before_action :set_user, only: %i[update]
   def update
     password, password_confirmation = password_params
     if @user.update({ password: password,
@@ -19,7 +13,7 @@ class RecoveryController < ApplicationController
   end
 
   # POST /reset_password/:email
-  def reset_password
+  def create
     if params[:email].present?
       email = params[:email].strip if params[:email].kind_of? String
       user = User.find_by_email email 
