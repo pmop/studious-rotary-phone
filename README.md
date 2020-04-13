@@ -36,7 +36,7 @@ POST   /signup(.:format)                     Creates user account            nam
 ## Authenticated
 ```
 Verb   URI Pattern                            Description                                                                                                              Parameters (Form URL Encoded)
-GET    /api/v1/reports/(.:format)             Show all Reports (Supports search by description and sorted scopes, see Parameters)                                      description=string, sort_by=(creation|updated),order=(asc|desc); all optional; can be chained
+GET    /api/v1/reports(.:format)             Show all Reports (Supports search by description and sorted scopes, see Parameters)                                      description=string, sort_by=(creation|updated),order=(asc|desc); all optional; can be chained
 POST   /api/v1/reports(.:format)              Create a Report                                                                                                          description=text, lat=decimal, lng=decimal; all required                                      
 GET    /api/v1/reports/:id(.:format)          Show a Report
 PATCH  /api/v1/reports/:id(.:format)          Edit/Update a Report                                                                                                     description=text,lat=decimal,lng=decimal,response=text; all optional
