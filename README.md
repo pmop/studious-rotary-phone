@@ -36,7 +36,7 @@ POST   /signup(.:format)                     Creates user account            nam
 ## Authenticated
 ```
 Verb   URI Pattern                            Description                                                                                                              Parameters (Form URL Encoded)
-GET    /api/v1/reports(.:format)              Show all Reports (Supports search by description and sorted scopes, see Parameters)                                      description=string, newest_first,oldest_first,updated_recently,updated_oldest =(true|false); all optional
+GET    /api/v1/reports/(.:format)             Show all Reports (Supports search by description and sorted scopes, see Parameters)                                      description=string, sort_by=(creation|updated),order=(asc|desc); all optional; can be chained
 POST   /api/v1/reports(.:format)              Create a Report                                                                                                          description=text, lat=decimal, lng=decimal; all required                                      
 GET    /api/v1/reports/:id(.:format)          Show a Report
 PATCH  /api/v1/reports/:id(.:format)          Edit/Update a Report                                                                                                     description=text,lat=decimal,lng=decimal,response=text; all optional
@@ -47,6 +47,11 @@ PATCH  /api/v1/users(.:format)                Allows logged User to edit his acc
 DELETE /api/v1/users(.:format)                Allows logged Usert to delete his account                                                                                 -
 DELETE /auth(.:format)                        Loggout user                                                                                                              -
 POST   /refresh(.:format)                     Refresh access token                                                                                                      -
+```
+
+## V1.1
+```
+GET    /api/v11/reports/(.:format)            Show all reports paginated and/or search and/or ordernate reports 							description=string, sort_by=(creation|updated), order=(asc|desc), page=integer limit=integer in 1..100 range
 ```
 
 ## Equivalência entre os modelos definidos na aplicação (inglês) e os requisitados (português); e schema.
