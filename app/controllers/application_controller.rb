@@ -7,6 +7,7 @@ class ApplicationController < ActionController::API
   rescue_from JWTSessions::Errors::Unauthorized, with: :not_authorized
   rescue_from Pmop::ResetPasswordError, with: :not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from ArgumentError, with: :bad_request
 
   rescue_from ActionController::ParameterMissing do |ex|
     missing_params ex.message

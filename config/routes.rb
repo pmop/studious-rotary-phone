@@ -8,7 +8,11 @@ Rails.application.routes.draw do
       patch 'users', controller: :users, action: :update
       delete 'users', controller: :users, action: :destroy
     end
-  end
+
+    namespace :v11 do
+      resources :reports
+    end
+  end # end of API namespace
 
   patch 'recovery', to: 'recovery#update', as: :recovery
   post 'reset_password', to: 'recovery#create', as: :reset_password
