@@ -9,7 +9,7 @@
     <p>If clicking doesn't work, try copying the link and then paste it into
     your browser url field.</p> <br/>
     <%= link_to 'Recover',
-      host: 'http://localhost:3000',
+      host: ENV['HOSTURL'],
       controller: 'recovery',
       action: 'create',
       token: @token,
