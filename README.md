@@ -9,6 +9,7 @@ Defaults to memory store. If Redis store is preferred, [configure according](htt
 - `CORS_HOST` Host where responses originates. In development or test modes, set it to http://localhost:3000;
 if your rails is configured to run in another port, change accordingly.
 - `MAIL_HOST` In development, set it to http://localhost:3000; if your rails is configured to run in another port, change accordingly.
+- `HOSTURL` Host's URL (http://localhost:3000 in production).
 ### Mailer
 - `MAIL_SMTP_ADDR` SMTP Address.
 - `MAILER_EMAIL` Email address that will be used to send recovery password email.
