@@ -5,7 +5,7 @@
     If clicking doesn't work, try copying and pasting into
     your browser url field.
     <%= link_to 'Recover',
-      host: 'http://localhost:3000',
+      host: ENV['HOSTURL'],
       controller: 'recovery',
       action: 'create',
       token: @token,
