@@ -57,4 +57,5 @@ Response        Medida adotada        response (text)
 ```
 ## Docker
 https://github.com/pmop/studious-rotary-phone-docker
+
 [More information on the wiki.](https://github.com/pmop/studious-rotary-phone/wiki)
