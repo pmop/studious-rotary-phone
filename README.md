@@ -1,3 +1,15 @@
+- [Environment variables](#environment-variables)
+  * [JWT](#jwt)
+  * [Hosts](#hosts)
+  * [Mailer](#mailer)
+  * [Database (Postgresql)](#database--postgresql-)
+  * [Rails](#rails)
+- [Endpoints](#endpoints)
+- [Public](#public)
+- [Authentication](#authenticated)
+- [V1.1](#v11)
+- [Docker](#docker)
+
 ## Environment variables
 
 Needed for Production, Test and Development modes
