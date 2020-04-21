@@ -1,6 +1,6 @@
 ## SRP
 
-REST API backend done using Ruby on Rails and Postgresql. Supports jwt authentication. This application was designed from very basic requirements (job technical interview take-home assignment). But with the correct changes it should serve as a nice backend for a "report something is happening here" with GPS support application, e.g. , report people throwing parties during current lockdown. 
+REST API backend done using Ruby on Rails and Postgresql. Supports jwt authentication. This application was designed from very basic requirements (job technical interview take-home assignment). But with the correct changes, it should serve as a nice backend for a "report something is happening here" with GPS support application, e.g. , report people throwing parties during current lockdown. 
 
 ## Table of Contents
 - [Environment variables](#environment-variables)
