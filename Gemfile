@@ -10,7 +10,7 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 # Use Postgresql 
 gem 'pg', '~> 1.2', '>= 1.2.3'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 # JWT token bearer authentication
 gem 'jwt_sessions'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
